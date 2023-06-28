@@ -30,14 +30,22 @@ public class Main {
 
         System.out.println("Приветсявую Вас в нашем ретсоране. У нас свободны столики с 1 по 5. Какой столик вы хотеле бы занять?");
         Scanner scanner = new Scanner(System.in);
-        int place = scanner.nextInt();
-        String selectedPlace = hall.getSeats(place);
+        int place = 0;
+        String selectedPlace ="";
+        while (place < 1 || place > 5) {
+                place = scanner.nextInt();
+                if (place >= 1 && place < +5) {
+                        selectedPlace = hall.getSeats(place);
+                } else {
+                        System.out.println("Пожалуйста вібирите столик от 1 до 5: ");
+                }
+        }
         visitor.placeVisitor = place;
         hall.removePlace(place);
 
 
-        System.out.println("Вы выбрали " + selectedPlace + ". Присаживайтесь. Вот наше меню: ");
-        System.out.println("Блюда:");
+        System.out.println("Вы выбрали столик - " + selectedPlace + ". Присаживайтесь. Вот наше меню: ");
+        System.out.println("Блюда: ");
         for (Integer key : menu.getDishes().keySet()) {
             String value = menu.getDishes().get(key);
             System.out.println("Номер блюда: " + key + " - " + value);
@@ -45,8 +53,17 @@ public class Main {
 
         System.out.println("Какое блюдо вы хотите заказать? Укажите его номер: ");
         Scanner scanner2 = new Scanner(System.in);
-        int numberDish = Integer.parseInt(scanner2.nextLine());
-        String orderDish = menu.getDishesByKey(numberDish);
+
+        int numberDish = 0;
+        String orderDish = "";
+        while (numberDish < 1 || numberDish > 5) {
+                numberDish = Integer.parseInt(scanner2.nextLine());
+                if(numberDish >= 1 && numberDish < +5) {
+                        orderDish = menu.getDishesByKey(numberDish);
+                }else {
+                        System.out.println("Выберите блюдо от 1 до 5: ");
+                }
+        }
 
         System.out.println("Вы выбрали  - " + orderDish + ". Отличный выбор. Какое колличество блюд вы хотите заказать?");
         Scanner scanner3 = new Scanner(System.in);
@@ -57,9 +74,18 @@ public class Main {
             String value = menu.getDrinks().get(key);
             System.out.println("Номер напитка: " + key + " - " + value);
         }
+
+        int numberDrinks = 0;
+        String orderDrinks = "";
         Scanner scanner4 = new Scanner(System.in);
-        int numberDrinks = Integer.parseInt(scanner4.nextLine());
-        String orderDrinks = menu.getDrinksByKey(numberDrinks);
+                while (numberDrinks < 8 || numberDrinks > 10) {
+                        numberDrinks = Integer.parseInt(scanner4.nextLine());
+                        if (numberDrinks >= 8 && numberDrinks < +10) {
+                                orderDrinks = menu.getDrinksByKey(numberDrinks);
+                        }else{
+                                System.out.println("Выбирите напиток с 8 по 10: ");
+                        }
+                }
         System.out.println("Вы выбрали  - " + orderDrinks + ". Сколько напитков вы хотите заказать?");
         Scanner scanner5 = new Scanner(System.in);
         int countDrinks = scanner5.nextInt();
